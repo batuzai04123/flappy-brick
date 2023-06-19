@@ -103,6 +103,12 @@ function handleMouseDown(e) {
     bird.jump()
 }
 
+function handleTouchStart(e) {
+    if (e.touches.length > 0) {
+        bird.jump()
+    }
+}
+
 function generateInitialClouds() {
     for (let i = 0; i < 30; i++) {
         const cloud = {
@@ -247,6 +253,7 @@ function startGame() {
 
     document.addEventListener('keydown', handleKeyDown)
     document.addEventListener('mousedown', handleMouseDown)
+    document.addEventListener('touchstart', handleTouchStart)
 
     // gameInterval = setInterval(updateGame, 20)
     requestAnimationFrame(updateGame)
