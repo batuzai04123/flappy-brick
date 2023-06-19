@@ -15,7 +15,7 @@ let gameInterval
 let isGameOver
 let justScored = false
 let score
-
+let requestId
 /**
  * Bird Class
  * 
@@ -146,7 +146,7 @@ function updateGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (isGameOver || bird.isTouchingTopOrBottom()) {
-        clearInterval(gameInterval);
+        // clearInterval(gameInterval);
         gameOver();
         return;
     }
@@ -196,6 +196,8 @@ function updateGame() {
     ctx.font = '24px sans-serif'
     ctx.fillStyle = 'black'
     ctx.fillText(`Score: ${score}`, 10, 30)
+
+    requestId = requestAnimationFrame(updateGame)
 }
 
 // Utility function to generate random height for bricks
@@ -222,7 +224,8 @@ function restartGame() {
     // Set score to 0
     score = 0
     // document.getElementById('restart-button').classList.add('hidden')
-    startGame()
+    // startGame()
+    requestAnimationFrame(updateGame)
 }
 
 function startGame() {
@@ -245,7 +248,8 @@ function startGame() {
     document.addEventListener('keydown', handleKeyDown)
     document.addEventListener('mousedown', handleMouseDown)
 
-    gameInterval = setInterval(updateGame, 20)
+    // gameInterval = setInterval(updateGame, 20)
+    requestAnimationFrame(updateGame)
 }
 
 window.addEventListener('DOMContentLoaded', function (ev) {
